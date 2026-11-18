@@ -6,7 +6,7 @@ export async function registerUser(email, password, name) {
         password,
         options: {
             data: {
-                name
+                nombre: name
             }
         }
     })

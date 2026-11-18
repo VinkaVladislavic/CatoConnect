@@ -12,8 +12,6 @@ function Login({ onRegister }) {
         event.preventDefault();
         setError('');
         setLoading(true);
-        console.log('Email:', email);
-        console.log('Sent successfully');
         try {
             await loginUser(email.trim(), password)
         } catch (err) {
@@ -29,7 +27,7 @@ function Login({ onRegister }) {
         <section className="login">
             <div className="login__card">
                 <h2 className="login__title">
-                    Bienvenido de nuevo!
+                    ¡Bienvenido de nuevo!
                 </h2>
                 <p className="login__description">
                     Inicia sesión para continuar en CatoConnect.
@@ -74,7 +72,7 @@ function Login({ onRegister }) {
                     ¿Olvidaste tu contraseña?
                 </button>
                 <div className="login__divider">
-                    <span>Aun no tienes cuenta?</span>
+                    <span>¿Aún no tienes cuenta?</span>
                 </div>
                 <button className="login__button login__button--secondary" type="button" onClick={onRegister}>
                     Crear nueva cuenta

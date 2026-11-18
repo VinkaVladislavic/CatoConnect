@@ -7,6 +7,7 @@ import Login from './components/authentication/Login'
 import Registro from './components/authentication/Register'
 import Bienvenida from './components/authentication/WelcomePageTest'
 
+import './index.css'
 import './App.css'
 
 function App() {
@@ -15,18 +16,15 @@ function App() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Consultar sesión al cargar la aplicación
     supabase.auth.getSession().then(({ data, error }) => {
       if (error) {
         console.error('Error al consultar la sesión:', error)
       } else {
         setUser(data.session?.user ?? null)
       }
-
       setLoading(false)
     })
 
-    // Escuchar cambios de autenticación
     const { data: { subscription } } =
       supabase.auth.onAuthStateChange(
         (_event, session) => {
@@ -53,15 +51,10 @@ function App() {
   return (
     <main className="auth-page">
       <BrandPanel />
-
       {vista === 'login' ? (
-        <Login
-          onRegister={() => setVista('registro')}
-        />
+        <Login onRegister={() => setVista('registro')}/>
       ) : (
-        <Registro
-          onLogin={() => setVista('login')}
-        />
+        <Registro onLogin={() => setVista('login')}/>
       )}
     </main>
   )

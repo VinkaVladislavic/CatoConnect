@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { registerUser } from '../../services/authService'
 import './Register.css'
 
-function Registro({ onRegister }) {
+function Registro({ onLogin }) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -142,7 +142,7 @@ function Registro({ onRegister }) {
         <button
           className="registro__login-link"
           type="button"
-          onClick={onRegister}
+          onClick={onLogin}
         >
           ¿Ya tienes cuenta? Inicia sesión
         </button>
