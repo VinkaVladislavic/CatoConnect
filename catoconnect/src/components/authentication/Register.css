@@ -1,0 +1,102 @@
+
+.registro {
+  width: 45%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.registro__card {
+  width: 100%;
+  max-width: 430px;
+  background: white;
+  border-radius: 18px;
+  padding: 40px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.07);
+}
+
+.registro__title {
+  color: #0c3d44;
+  font-size: 27px;
+  margin: 0 0 10px;
+}
+
+.registro__description {
+  color: #748084;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+.registro__form,
+.registro__field {
+  display: flex;
+  flex-direction: column;
+}
+
+.registro__field {
+  margin-bottom: 16px;
+}
+
+.registro__label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #344b50;
+  margin-bottom: 8px;
+}
+
+.registro__input {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #dce4e6;
+  border-radius: 8px;
+  background: white;
+  color: #263b40;
+  outline: none;
+}
+
+.registro__input:focus {
+  border-color: #48917e;
+  box-shadow: 0 0 0 3px rgba(72, 145, 126, 0.12);
+}
+
+.registro__button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #0c3d44;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.registro__button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.registro__login-link {
+  display: block;
+  margin: 20px auto 0;
+  border: none;
+  background: transparent;
+  color: #36726a;
+  cursor: pointer;
+}
+
+.registro__message {
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.registro__message--error {
+  background: #fff0f0;
+  color: #a32929;
+}
+
+.registro__message--success {
+  background: #e8f6ef;
+  color: #216b48;
+}

@@ -1,0 +1,117 @@
+.login {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.login__card {
+    background-color: white;
+    border-radius: 18px;
+    width: 100%;
+    max-width: 430px;
+    padding: 40px;
+    box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.1);
+}
+
+.login__title {
+    color: #0c3d44;
+    font-size: 28px;
+    margin: 0 0 10px 0;
+}
+
+.login__description {
+    color: #0c3d44;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.login__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login__field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.login__label {
+    color: #0c3d44;
+    font-size: 14px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.login__input {
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: white;
+    color: #263b04;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.3s;
+}
+
+.login__input:focus {
+    border-color: #0c3d44;
+    box-shadow: 0 0 5px rgba(72, 145, 126, 0.12);
+}
+
+.login__button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login__forgot {
+  display: block;
+  width: 100%;
+  text-align: center;
+  color: #36726a;
+  font-size: 14px;
+  margin-top: 22px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.login__forgot:hover {
+  text-decoration: underline;
+}
+
+.login__divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 28px 0;
+  color: #899598;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+
+.login__error {
+  padding: 12px;
+  margin: 0 0 16px;
+  border-radius: 8px;
+  background: #fff0f0;
+  color: #a32929;
+  font-size: 14px;
+}
+
+.login__button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
