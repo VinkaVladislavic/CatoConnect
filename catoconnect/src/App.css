@@ -1,0 +1,50 @@
+.auth-page {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 55% 45%;
+  align-items: center;
+  gap: clamp(32px, 5vw, 100px);
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: clamp(24px, 4vw, 72px);
+  overflow: hidden;
+  background: #0b3260;
+}
+.auth-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: url('/images/CatoCampus.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.auth-page::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(100deg, rgba(0, 34, 78, .87) 0%, rgba(0, 48, 101, .70) 37%, rgba(7, 58, 112, .26) 68%, rgba(12, 45, 81, .24) 100%);
+}
+.auth-page__loading { 
+  display: grid; 
+  place-items: center; 
+  min-height: 100vh; 
+  margin: 0; 
+  color: var(--color-primary); 
+  font-family: var(--font-heading); 
+}
+
+@media (max-width: 850px) {
+  .auth-page { 
+    grid-template-columns: 100%;
+    gap: 24px; 
+    padding: 38px 18px; 
+  }
+  .auth-page::after { 
+    background: linear-gradient(180deg, rgba(0, 34, 78, .87), rgba(0, 48, 101, .58) 48%, rgba(0, 45, 94, .32)); 
+  }
+}
