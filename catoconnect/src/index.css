@@ -1,0 +1,58 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap');
+
+:root {
+  --color-primary: #003B7A;
+  --color-primary-hover: #002D5D;
+  --color-secondary: #1468B3;
+  --color-accent: #FFCC00;
+  --color-accent-hover: #E6B800;
+
+  --color-background: #F4F7FB;
+  --color-surface: white;
+  --color-border: #D8E3F0;
+
+  --color-text: #243447;
+  --color-text-muted: #64748B;
+  --color-error: #B42318;
+  --color-error-bg: #FEF3F2;
+  --color-success: #166534;
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --radius-md: 10px;
+  --radius-lg: 20px;
+  --shadow-card: 0 16px 48px rgba(0, 59, 122, 0.10);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+button, input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible, input:focus-visible {
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+#root {
+  min-height: 100vh;
+}
