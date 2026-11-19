@@ -1,0 +1,208 @@
+/* =====================================================================
+   Muro de CatoConnect
+   Todas las clases empiezan con "muro-" para no chocar con el CSS del resto.
+   Los colores se cambian en un solo lugar: las variables de .muro
+   ===================================================================== */
+
+.muro {
+  --muro-primary: #00305f;
+  --muro-primary-soft: #e6eef8;
+  --muro-accent: #f5b800;
+  --muro-text: #1c2430;
+  --muro-muted: #66707d;
+  --muro-border: #d9e0ea;
+  --muro-bg: #f4f7fb;
+  --muro-danger: #c62828;
+
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 20px 12px 40px;
+  color: var(--muro-text);
+  box-sizing: border-box;
+}
+
+.muro *,
+.muro *::before,
+.muro *::after {
+  box-sizing: border-box;
+}
+
+.muro-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 10px rgba(0, 48, 95, 0.08);
+}
+
+.muro-muted { color: var(--muro-muted); font-size: 0.85rem; }
+.muro-center { text-align: center; }
+.muro-error { color: var(--muro-danger); font-size: 0.9rem; margin: 6px 0; }
+.muro-warn { color: var(--muro-danger); font-weight: 600; }
+.muro-hint { margin: 6px 0 0; text-align: right; font-size: 0.75rem; }
+.muro-end { margin: 24px 0 10px; }
+.muro-sentinel { height: 1px; }
+
+/* ---------- Campos y botones ---------- */
+.muro-input {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--muro-border);
+  border-radius: 10px;
+  font: inherit;
+  color: inherit;
+  background: #fafbfd;
+  resize: vertical;
+}
+.muro-input:focus {
+  outline: 2px solid var(--muro-primary-soft);
+  border-color: var(--muro-primary);
+}
+
+.muro-select {
+  padding: 7px 10px;
+  border: 1px solid var(--muro-border);
+  border-radius: 10px;
+  font: inherit;
+  color: inherit;
+  background: #fafbfd;
+  max-width: 160px;
+}
+
+.muro-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid var(--muro-primary);
+  border-radius: 10px;
+  background: var(--muro-primary);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.muro-btn:hover:not(:disabled) { filter: brightness(1.15); }
+.muro-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.muro-btn--ghost { background: transparent; border-color: transparent; color: var(--muro-muted); }
+.muro-btn--ghost:hover:not(:disabled) { background: var(--muro-bg); filter: none; }
+.muro-btn--sm { padding: 4px 10px; font-size: 0.85rem; }
+.muro-btn.is-liked { color: var(--muro-primary); }
+
+.muro-link {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--muro-primary);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.muro-link:hover { text-decoration: underline; }
+
+/* ---------- Composer ---------- */
+.muro-composer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.muro-preview { position: relative; margin-top: 8px; }
+.muro-preview img { width: 100%; max-height: 260px; object-fit: cover; border-radius: 10px; }
+.muro-preview-remove {
+  position: absolute; top: 6px; right: 6px; width: 28px; height: 28px;
+  border: none; border-radius: 50%; background: rgba(0, 0, 0, 0.65);
+  color: #fff; font-size: 1.1rem; cursor: pointer;
+}
+
+/* ---------- Filtros ---------- */
+.muro-filters { display: flex; flex-direction: column; gap: 10px; }
+.muro-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.muro-chip {
+  padding: 5px 12px;
+  border: 1px solid var(--muro-border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--muro-muted);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.muro-chip:hover { background: var(--muro-bg); }
+.muro-chip.is-active { background: var(--muro-primary); border-color: var(--muro-primary); color: #fff; }
+
+.muro-new-posts {
+  display: block;
+  margin: 0 auto 14px;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 999px;
+  background: var(--muro-accent);
+  color: var(--muro-primary);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 48, 95, 0.25);
+  animation: muro-pop 0.25s ease-out;
+}
+@keyframes muro-pop { from { transform: translateY(-8px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* ---------- Publicación ---------- */
+.muro-post-header { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.muro-post-meta { display: flex; flex-direction: column; flex: 1; min-width: 120px; }
+.muro-badge {
+  padding: 3px 10px; border-radius: 999px; white-space: nowrap;
+  background: var(--muro-primary-soft); color: var(--muro-primary);
+  font-size: 0.75rem; font-weight: 600;
+}
+.muro-post-content { margin: 0 0 10px; white-space: pre-wrap; word-break: break-word; line-height: 1.45; }
+.muro-post-content a { color: var(--muro-primary); }
+.muro-post-image { display: block; width: 100%; max-height: 480px; object-fit: cover; border-radius: 10px; cursor: zoom-in; }
+.muro-post-stats { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--muro-border); }
+.muro-post-actions { display: flex; gap: 4px; padding-top: 4px; }
+.muro-post-actions .muro-btn { flex: 1; justify-content: center; }
+
+.muro-edit-actions { display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin: 8px 0 10px; }
+
+.muro-avatar {
+  width: 40px; height: 40px; flex-shrink: 0; overflow: hidden;
+  display: grid; place-items: center; border-radius: 50%;
+  background: var(--muro-accent); color: var(--muro-primary); font-weight: 700;
+}
+.muro-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.muro-avatar--sm { width: 30px; height: 30px; font-size: 0.75rem; }
+
+/* ---------- Comentarios ---------- */
+.muro-comments { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.muro-comment { display: flex; align-items: flex-start; gap: 8px; }
+.muro-comment-body { flex: 1; padding: 6px 12px; border-radius: 14px; background: var(--muro-bg); }
+.muro-comment-body p { margin: 2px 0 0; word-break: break-word; }
+.muro-comment-form { display: flex; gap: 8px; }
+
+/* ---------- Imagen ampliada ---------- */
+.muro-lightbox {
+  position: fixed; inset: 0; z-index: 100; padding: 20px;
+  display: grid; place-items: center;
+  background: rgba(0, 0, 0, 0.85); cursor: zoom-out;
+}
+.muro-lightbox img { max-width: 100%; max-height: 100%; border-radius: 8px; }
+.muro-lightbox-close {
+  position: absolute; top: 14px; right: 18px;
+  border: none; background: none; color: #fff; font-size: 2.2rem; line-height: 1; cursor: pointer;
+}
+
+/* ---------- Carga (skeleton) ---------- */
+.muro-sk {
+  border-radius: 6px;
+  background: linear-gradient(90deg, #e4e8ee 25%, #f2f4f7 50%, #e4e8ee 75%);
+  background-size: 200% 100%;
+  animation: muro-shimmer 1.2s infinite;
+}
+@keyframes muro-shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+.muro-sk-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.muro-sk-col { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.muro-sk-circle { width: 40px; height: 40px; border-radius: 50%; }
+.muro-sk-line { height: 12px; margin-bottom: 8px; }

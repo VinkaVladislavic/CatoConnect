@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from './lib/supabase'
+import Muro from './components/muro/Muro'
 
 import BrandPanel from './components/branding/BrandPanel'
 import Login from './components/authentication/Login'
@@ -41,7 +42,7 @@ function App() {
     return (
       <div className="app-shell">
         <Navbar user={user} page={pagina} onNavigate={setPagina} />
-        {pagina === 'inicio' && <Bienvenida user={user} />}
+        {pagina === 'inicio' && <Muro user={user}/>}
         {pagina === 'espacios' && (
           <main className="app-shell__page">
             <h1>Espacios</h1>
