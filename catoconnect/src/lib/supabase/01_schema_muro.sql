@@ -1,9 +1,3 @@
--- =====================================================================
--- UCB Social - esquema para Supabase
--- Ejecutar completo en: Supabase > SQL Editor
--- =====================================================================
-
--- ---------- Perfiles ----------
 create table public.profiles (
   id          uuid primary key references auth.users(id) on delete cascade,
   full_name   text not null,
@@ -12,7 +6,6 @@ create table public.profiles (
   created_at  timestamptz not null default now()
 );
 
--- ---------- Publicaciones (el muro) ----------
 create table public.posts (
   id          uuid primary key default gen_random_uuid(),
   user_id     uuid not null,
@@ -28,7 +21,6 @@ create table public.posts (
 create index posts_created_at_idx on public.posts (created_at desc);
 create index posts_category_idx on public.posts (category, created_at desc);
 
--- updated_at se llena solo cuando cambia el contenido o la categoría
 create or replace function public.set_post_updated_at()
 returns trigger
 language plpgsql
@@ -46,7 +38,6 @@ create trigger posts_set_updated_at
   before update on public.posts
   for each row execute function public.set_post_updated_at();
 
--- ---------- Me gusta ----------
 create table public.likes (
   post_id     uuid not null references public.posts(id) on delete cascade,
   user_id     uuid not null references public.profiles(id) on delete cascade,
@@ -54,7 +45,6 @@ create table public.likes (
   primary key (post_id, user_id)
 );
 
--- ---------- Comentarios ----------
 create table public.comments (
   id          uuid primary key default gen_random_uuid(),
   post_id     uuid not null references public.posts(id) on delete cascade,
@@ -66,9 +56,6 @@ create table public.comments (
 );
 create index comments_post_idx on public.comments (post_id, created_at);
 
--- =====================================================================
--- Solo correos @ucb.edu.bo pueden registrarse
--- =====================================================================
 create or replace function public.enforce_ucb_email()
 returns trigger
 language plpgsql
@@ -87,7 +74,6 @@ create trigger enforce_ucb_email_trg
   before insert on auth.users
   for each row execute function public.enforce_ucb_email();
 
--- Crea el perfil automaticamente al registrarse
 create or replace function public.handle_new_user()
 returns trigger
 language plpgsql
@@ -109,15 +95,11 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function public.handle_new_user();
 
--- =====================================================================
--- Row Level Security
--- =====================================================================
 alter table public.profiles enable row level security;
 alter table public.posts    enable row level security;
 alter table public.likes    enable row level security;
 alter table public.comments enable row level security;
 
--- Perfiles: todos los logueados leen, cada quien edita el suyo
 create policy "profiles_select" on public.profiles
   for select to authenticated using (true);
 create policy "profiles_update_own" on public.profiles
@@ -149,10 +131,6 @@ create policy "comments_insert_own" on public.comments
 create policy "comments_delete_own" on public.comments
   for delete to authenticated using (auth.uid() = user_id);
 
--- =====================================================================
--- Realtime (para que el muro se actualice solo)
--- =====================================================================
--- replica identity full permite saber quién hizo el like/comentario al borrarlo
 alter table public.likes    replica identity full;
 alter table public.comments replica identity full;
 
@@ -160,9 +138,6 @@ alter publication supabase_realtime add table public.posts;
 alter publication supabase_realtime add table public.likes;
 alter publication supabase_realtime add table public.comments;
 
--- =====================================================================
--- Storage: imagenes de publicaciones
--- =====================================================================
 insert into storage.buckets (id, name, public)
 values ('post-images', 'post-images', true)
 on conflict (id) do nothing;

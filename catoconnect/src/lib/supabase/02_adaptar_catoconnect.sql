@@ -1,12 +1,3 @@
--- =====================================================================
--- Adaptación del muro a CatoConnect
--- Requisito: haber ejecutado ANTES 01_schema_muro.sql en este proyecto.
--- Es seguro ejecutarlo más de una vez. Solo toca las tablas del muro
--- (profiles, posts, likes, comments) y la función handle_new_user.
--- =====================================================================
-
--- 1) Al registrarse, el perfil toma el nombre desde 'nombre' (lo que guarda
---    CatoConnect en user_metadata). También acepta 'full_name'.
 create or replace function public.handle_new_user()
 returns trigger
 language plpgsql
@@ -29,8 +20,6 @@ begin
 end;
 $$;
 
--- 2) Crea el perfil de los usuarios que ya existían antes de instalar el muro
---    (sin perfil no pueden publicar: posts.user_id apunta a profiles.id)
 insert into public.profiles (id, full_name)
 select
   u.id,
@@ -38,7 +27,6 @@ select
 from auth.users u
 where not exists (select 1 from public.profiles p where p.id = u.id);
 
--- 3) Corrige los perfiles que quedaron con el prefijo del correo en vez del nombre real
 update public.profiles p
 set full_name = u.raw_user_meta_data->>'nombre'
 from auth.users u

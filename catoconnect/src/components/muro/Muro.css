@@ -1,9 +1,3 @@
-/* =====================================================================
-   Muro de CatoConnect
-   Todas las clases empiezan con "muro-" para no chocar con el CSS del resto.
-   Los colores se cambian en un solo lugar: las variables de .muro
-   ===================================================================== */
-
 .muro {
   --muro-primary: #00305f;
   --muro-primary-soft: #e6eef8;
@@ -43,7 +37,6 @@
 .muro-end { margin: 24px 0 10px; }
 .muro-sentinel { height: 1px; }
 
-/* ---------- Campos y botones ---------- */
 .muro-input {
   display: block;
   width: 100%;
@@ -101,7 +94,6 @@
 }
 .muro-link:hover { text-decoration: underline; }
 
-/* ---------- Composer ---------- */
 .muro-composer-actions {
   display: flex;
   align-items: center;
@@ -118,7 +110,6 @@
   color: #fff; font-size: 1.1rem; cursor: pointer;
 }
 
-/* ---------- Filtros ---------- */
 .muro-filters { display: flex; flex-direction: column; gap: 10px; }
 .muro-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .muro-chip {
@@ -150,7 +141,6 @@
 }
 @keyframes muro-pop { from { transform: translateY(-8px); opacity: 0; } to { transform: none; opacity: 1; } }
 
-/* ---------- Publicación ---------- */
 .muro-post-header { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
 .muro-post-meta { display: flex; flex-direction: column; flex: 1; min-width: 120px; }
 .muro-badge {
@@ -175,14 +165,11 @@
 .muro-avatar img { width: 100%; height: 100%; object-fit: cover; }
 .muro-avatar--sm { width: 30px; height: 30px; font-size: 0.75rem; }
 
-/* ---------- Comentarios ---------- */
 .muro-comments { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
 .muro-comment { display: flex; align-items: flex-start; gap: 8px; }
 .muro-comment-body { flex: 1; padding: 6px 12px; border-radius: 14px; background: var(--muro-bg); }
 .muro-comment-body p { margin: 2px 0 0; word-break: break-word; }
 .muro-comment-form { display: flex; gap: 8px; }
-
-/* ---------- Imagen ampliada ---------- */
 .muro-lightbox {
   position: fixed; inset: 0; z-index: 100; padding: 20px;
   display: grid; place-items: center;
@@ -194,7 +181,6 @@
   border: none; background: none; color: #fff; font-size: 2.2rem; line-height: 1; cursor: pointer;
 }
 
-/* ---------- Carga (skeleton) ---------- */
 .muro-sk {
   border-radius: 6px;
   background: linear-gradient(90deg, #e4e8ee 25%, #f2f4f7 50%, #e4e8ee 75%);

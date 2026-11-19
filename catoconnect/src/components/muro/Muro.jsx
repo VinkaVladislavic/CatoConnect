@@ -8,7 +8,7 @@ import './Muro.css'
 
 export default function Muro({ user }) {
   const [posts, setPosts] = useState([])
-  const [pending, setPending] = useState([]) // publicaciones nuevas de otros, aún no mostradas
+  const [pending, setPending] = useState([]) // publicaciones nuevas de otros aún no mostradas
   const [loading, setLoading] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
   const [hasMore, setHasMore] = useState(true)
@@ -18,7 +18,7 @@ export default function Muro({ user }) {
   const [searchInput, setSearchInput] = useState('')
   const [search, setSearch] = useState('')
 
-  // Refs para que los callbacks de tiempo real y el scroll infinito vean siempre el valor actual
+  
   const filtersRef = useRef({ category, search })
   const postsRef = useRef(posts)
   const busyRef = useRef(false)
@@ -32,27 +32,35 @@ export default function Muro({ user }) {
     postsRef.current = posts
   }, [posts])
 
-  // Espera 350 ms después de dejar de escribir antes de buscar
   useEffect(() => {
     const t = setTimeout(() => setSearch(searchInput.trim()), 350)
     return () => clearTimeout(t)
   }, [searchInput])
 
-  // Carga inicial y cada vez que cambian los filtros
   useEffect(() => {
     let active = true
-    setLoading(true)
-    setError('')
-    setPending([])
 
-    fetchPosts({ category, search })
-      .then((data) => {
+    const loadPosts = async () => {
+      try {
+        const data = await fetchPosts({ category, search })
+
         if (!active) return
+
         setPosts(data)
         setHasMore(data.length === PAGE_SIZE)
-      })
-      .catch((e) => active && setError(e.message))
-      .finally(() => active && setLoading(false))
+        setError('')
+      } catch (e) {
+        if (active) {
+          setError(e.message)
+        }
+      } finally {
+        if (active) {
+          setLoading(false)
+        }
+      }
+    }
+
+    loadPosts()
 
     return () => {
       active = false

@@ -3,7 +3,6 @@ import { supabase } from '../lib/supabase'
 export const PAGE_SIZE = 10
 const BUCKET = 'post-images'
 
-// Publicación + autor + likes + cantidad de comentarios
 export const POST_SELECT = `
   id, content, image_url, category, created_at, updated_at, user_id,
   author:profiles!posts_user_id_fkey ( full_name, career, avatar_url ),
@@ -13,14 +12,12 @@ export const POST_SELECT = `
 
 const escapeLike = (s) => s.replace(/[\\%_]/g, (m) => '\\' + m)
 
-// Ruta del archivo en Storage a partir de su URL pública
 function storagePathFromUrl(url) {
   const marker = `/${BUCKET}/`
   const i = url ? url.indexOf(marker) : -1
   return i === -1 ? null : decodeURIComponent(url.slice(i + marker.length))
 }
 
-// Una página del muro. Paginación por cursor: pasar `before` = created_at de la última publicación
 export async function fetchPosts({ category, search, before } = {}) {
   let query = supabase
     .from('posts')
@@ -43,7 +40,6 @@ export async function fetchPostById(id) {
   return data
 }
 
-// Crea la publicación; si trae imagen, la sube antes y la borra si el insert falla
 export async function createPost({ userId, content, category, file }) {
   let imageUrl = null
   let uploadedPath = null
@@ -80,7 +76,6 @@ export async function updatePost(id, { content, category }) {
   return data
 }
 
-// Borra la publicación y su imagen (para no dejar archivos huérfanos en Storage)
 export async function deletePost(post) {
   const { error } = await supabase.from('posts').delete().eq('id', post.id)
   if (error) throw error
@@ -89,7 +84,6 @@ export async function deletePost(post) {
   if (path) await supabase.storage.from(BUCKET).remove([path])
 }
 
-// Tiempo real del muro. Devuelve la función para cancelar la suscripción.
 export function subscribeToWall(handlers) {
   const on = (event, table, callback) => ({ event, table, callback })
   const listeners = [

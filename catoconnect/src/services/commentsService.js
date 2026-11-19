@@ -30,7 +30,6 @@ export async function deleteComment(id) {
   if (error) throw error
 }
 
-// Tiempo real de los comentarios de UNA publicación. Devuelve la función para cancelar.
 export function subscribeToComments(postId, { onInsert, onDelete }) {
   const channel = supabase
     .channel(`comentarios-${postId}`)
